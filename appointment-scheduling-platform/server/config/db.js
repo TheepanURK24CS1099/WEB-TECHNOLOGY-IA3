@@ -1,4 +1,12 @@
 const mongoose = require('mongoose');
+const dns = require('dns');
+
+// Use reliable public DNS resolvers to handle SRV record lookups on all networks
+try {
+  dns.setServers(['8.8.8.8', '1.1.1.1']);
+} catch (dnsErr) {
+  // Fall back to system default if custom DNS cannot be set
+}
 
 /**
  * Connect to MongoDB using the URI specified in server/.env
